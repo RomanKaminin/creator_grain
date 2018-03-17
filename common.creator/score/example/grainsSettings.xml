@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><grainSettings>
+	<!--Общие настройки для гранул-->
+	<generalSettings>
+	</generalSettings>
+	<!--Отдельные настройки для гранул-->
+	<grains>
+		<grain name="common">
+			<!--Указание необходимых групп навигатора для каждой userdata-->
+			<navigator>
+				<userdata name="default">
+				</userdata>
+			</navigator>
+		</grain>
+		<grain name="security">
+			<securitySettings>
+				<parameter name="employeesGrain" value=""></parameter>
+				<parameter name="employeesTable" value=""></parameter>
+				<parameter name="employeesId" value=""></parameter>
+				<parameter name="employeesName" value=""></parameter>				
+				<parameter name="isSystemInitialised" value="true"></parameter>
+				<parameter name="useAuthServer" value="false"></parameter>
+				<parameter name="loginEqualSubject" value="true"></parameter>
+			</securitySettings>			
+		</grain>
+		<!--Настройки гранулы-->
+	</grains>
+</grainSettings>
+
+

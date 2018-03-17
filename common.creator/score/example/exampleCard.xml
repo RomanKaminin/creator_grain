@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLschema" xmlns:fs="http://www.curs.ru/ns/FormServer" xmlns:xf="http://www.w3.org/2002/xforms">
+	<head>
+
+		<xf:model id="xformId_mainModel">
+			<xf:instance id="xformId_mainInstance">
+				<schema xmlns="">
+				</schema>
+			</xf:instance>
+			<xf:bind>
+                <xf:bind nodeset="instance('xformId_mainInstance')/context/first_column" type="int" required="true()" />
+                <xf:bind nodeset="instance('xformId_mainInstance')/context/second_column" type="string" required="true()" />
+                <xf:bind nodeset="instance('xformId_mainInstance')/context/third_column" type="string" />
+                <xf:bind nodeset="instance('xformId_mainInstance')/context/fourth_column" type="boolean" />
+                <xf:bind nodeset="instance('xformId_mainInstance')/context/fifth_column" type="date" required="true()" />
+                </xf:bind>
+  		</xf:model>
+	</head>
+	<body>
+        <xf:dialog id="warningMessageDialog">
+            <b>Заполнены не все обязательные поля!</b>
+            <br/>
+            <div class="button100">
+                <xf:trigger>
+                    <xf:label>Закрыть</xf:label>
+                    <xf:action ev:event="DOMActivate">
+                        <xf:hide dialog="warningMessageDialog"/>
+                    </xf:action>
+                </xf:trigger>
+            </div>
+        </xf:dialog>
+        <div class="baseInput400" style="float: none;">
+            <xf:input ref="instance('xformId_mainInstance')/context/second_column">
+                <xf:label>ФИО:</xf:label>
+            </xf:input>
+        </div>
+        <div class="dateInput" style="float: none;">
+            <xf:input ref="instance('xformId_mainInstance')/context/fifth_column">
+                <xf:label>Дата начала работы в компании:</xf:label>
+            </xf:input>
+        </div>
+        <div class="baseInput200" style="float: none; ">
+            <xf:input ref="instance('xformId_mainInstance')/context/first_column">
+                <xf:label>Кол-во реализованных проектов:</xf:label>
+            </xf:input>
+        </div>
+
+        <div class=" baseInput200" style="float: none;">
+            <xf:select1 ref="instance('xformId_mainInstance')/context/third_column" >
+                <xf:item>
+                    <xf:label>Питон</xf:label>
+                    <xf:value>python</xf:value>
+                </xf:item>
+                <xf:item>
+                    <xf:label>Джава</xf:label>
+                    <xf:value>Java</xf:value>
+                </xf:item>
+                <xf:label>На каком языке пишите код:</xf:label>
+            </xf:select1>
+        </div>
+        <div class="break baseInput200" style="float: none;" >
+            <xf:input  ref="instance('xformId_mainInstance')/context/fourth_column">
+                <xf:label>КУРС круче всех?:</xf:label>
+            </xf:input>
+        </div>
+
+
+        <xf:group>
+            <div class="break button200" style=" padding-left: 10px; ">
+                <xf:trigger>
+                    <xf:label>Сохранить</xf:label>
+                    <xf:action ev:event="DOMActivate"
+                               if="(is-valid(instance('xformId_mainInstance'))=false())">
+                        <xf:show dialog="warningMessageDialog"/>
+                    </xf:action>
+                    <xf:action ev:event="DOMActivate"
+                               if="(is-valid(instance('xformId_mainInstance'))=true())">
+                        <xf:load
+                                resource="javascript:gwtXFormSave('xformId','event_save',  Writer.toString(getSubformInstanceDocument('xformId_mainModel', 'xformId_mainInstance')))"/>
+                    </xf:action>
+                </xf:trigger>
+            </div>
+            <div class="button200">
+                <xf:trigger>
+                    <xf:label>Закрыть</xf:label>
+                    <xf:action ev:event="DOMActivate">
+                        <xf:load
+                                resource="javascript:gwtXFormUpdate('xformId', null, null, true)"/>
+                    </xf:action>
+                </xf:trigger>
+            </div>
+        </xf:group>		
+	            
+	</body>
+</html>
